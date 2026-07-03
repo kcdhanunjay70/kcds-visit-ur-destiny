@@ -20,7 +20,7 @@
         </a>
         <div class="nav-actions">
           <a href="#routes">Routes</a>
-          <a href="#universities">Universities</a>
+          <a href="#universities" data-open-education>Universities</a>
           <a href="#insights">Insights</a>
           <a href="#planner">Planner</a>
         </div>
@@ -55,7 +55,7 @@
           <button type="button" data-search="Beach">Beach trips</button>
           <button type="button" data-search="Japan">Japan culture</button>
           <button type="button" data-search="Emirates">Emirates routes</button>
-          <button class="education-chip" type="button" data-scroll="#universities">Foreign countries universities</button>
+          <button class="education-chip" type="button" data-toggle="#universities" aria-expanded="false">Foreign countries universities</button>
         </div>
       </section>
     </header>
@@ -120,7 +120,7 @@
         <p class="empty-state" id="emptyState" hidden>No matching routes yet. Try a wider search.</p>
       </section>
 
-      <section class="education-section" id="universities" aria-label="Foreign countries universities">
+      <section class="education-section is-hidden" id="universities" aria-label="Foreign countries universities">
         <div class="education-hero">
           <div>
             <p class="section-kicker">Study abroad desk</p>
@@ -184,6 +184,72 @@
               <div><dt>Fees</dt><dd>EUR 0-6k / semester</dd></div>
               <div><dt>Intakes</dt><dd>Winter, Summer</dd></div>
               <div><dt>Visa</dt><dd>Student visa, blocked account, admission letter</dd></div>
+            </dl>
+          </article>
+
+          <article class="education-card">
+            <span class="study-tag">New Zealand</span>
+            <h3>University of Auckland</h3>
+            <p>Software Engineering, Business, Construction Management, Data Analytics</p>
+            <dl>
+              <div><dt>Fees</dt><dd>NZD 36k-52k / year</dd></div>
+              <div><dt>Intakes</dt><dd>February, July</dd></div>
+              <div><dt>Visa</dt><dd>Fee-paying student visa, offer letter, funds, insurance</dd></div>
+            </dl>
+          </article>
+
+          <article class="education-card">
+            <span class="study-tag">Ireland</span>
+            <h3>Trinity College Dublin</h3>
+            <p>Computer Science, Finance, Pharmaceutical Sciences, Digital Marketing</p>
+            <dl>
+              <div><dt>Fees</dt><dd>EUR 18k-32k / year</dd></div>
+              <div><dt>Intakes</dt><dd>September, January</dd></div>
+              <div><dt>Visa</dt><dd>Long stay D visa, acceptance letter, funds, insurance</dd></div>
+            </dl>
+          </article>
+
+          <article class="education-card">
+            <span class="study-tag">France</span>
+            <h3>Sorbonne University</h3>
+            <p>AI, Luxury Brand Management, International Business, Life Sciences</p>
+            <dl>
+              <div><dt>Fees</dt><dd>EUR 4k-22k / year</dd></div>
+              <div><dt>Intakes</dt><dd>September, January</dd></div>
+              <div><dt>Visa</dt><dd>VLS-TS student visa, Campus France, proof of resources</dd></div>
+            </dl>
+          </article>
+
+          <article class="education-card">
+            <span class="study-tag">Singapore</span>
+            <h3>National University of Singapore</h3>
+            <p>Data Science, FinTech, Computer Engineering, Supply Chain Management</p>
+            <dl>
+              <div><dt>Fees</dt><dd>SGD 32k-58k / year</dd></div>
+              <div><dt>Intakes</dt><dd>August, January</dd></div>
+              <div><dt>Visa</dt><dd>Student pass, IPA letter, medical exam, financial proof</dd></div>
+            </dl>
+          </article>
+
+          <article class="education-card">
+            <span class="study-tag">Netherlands</span>
+            <h3>Delft University of Technology</h3>
+            <p>Embedded Systems, Aerospace, Sustainable Energy, Architecture</p>
+            <dl>
+              <div><dt>Fees</dt><dd>EUR 16k-24k / year</dd></div>
+              <div><dt>Intakes</dt><dd>September</dd></div>
+              <div><dt>Visa</dt><dd>MVV/residence permit, university sponsor, funds</dd></div>
+            </dl>
+          </article>
+
+          <article class="education-card">
+            <span class="study-tag">Sweden</span>
+            <h3>KTH Royal Institute of Technology</h3>
+            <p>Machine Learning, ICT Innovation, Vehicle Engineering, Sustainable Tech</p>
+            <dl>
+              <div><dt>Fees</dt><dd>SEK 155k-310k / year</dd></div>
+              <div><dt>Intakes</dt><dd>August</dd></div>
+              <div><dt>Visa</dt><dd>Residence permit, admission decision, funds, insurance</dd></div>
             </dl>
           </article>
 

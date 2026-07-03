@@ -73,7 +73,8 @@ const elements = {
   topRegion: document.querySelector("#topRegion"),
   form: document.querySelector("#searchForm"),
   reset: document.querySelector("#resetButton"),
-  quickSearch: document.querySelector(".quick-search")
+  quickSearch: document.querySelector(".quick-search"),
+  educationNav: document.querySelector("[data-open-education]")
 };
 
 function uniqueValues(key) {
@@ -194,12 +195,26 @@ elements.form.addEventListener("submit", (event) => {
 
 elements.reset.addEventListener("click", resetFilters);
 
+function setEducationVisibility(show) {
+  const section = document.querySelector("#universities");
+  const toggleButton = document.querySelector("button[data-toggle='#universities']");
+  section.classList.toggle("is-hidden", !show);
+  toggleButton.setAttribute("aria-expanded", String(show));
+  toggleButton.textContent = show ? "Hide universities" : "Foreign countries universities";
+  toggleButton.classList.toggle("is-active", show);
+  return section;
+}
+
 elements.quickSearch.addEventListener("click", (event) => {
   const button = event.target.closest("button[data-search]");
-  const scrollButton = event.target.closest("button[data-scroll]");
+  const toggleButton = event.target.closest("button[data-toggle]");
 
-  if (scrollButton) {
-    document.querySelector(scrollButton.dataset.scroll).scrollIntoView({ behavior: "smooth", block: "start" });
+  if (toggleButton) {
+    const shouldShow = document.querySelector(toggleButton.dataset.toggle).classList.contains("is-hidden");
+    const section = setEducationVisibility(shouldShow);
+    if (shouldShow) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
     return;
   }
 
@@ -208,4 +223,9 @@ elements.quickSearch.addEventListener("click", (event) => {
   elements.query.value = button.dataset.search;
   renderRoutes();
   document.querySelector("#routes").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+elements.educationNav.addEventListener("click", (event) => {
+  event.preventDefault();
+  setEducationVisibility(true).scrollIntoView({ behavior: "smooth", block: "start" });
 });
