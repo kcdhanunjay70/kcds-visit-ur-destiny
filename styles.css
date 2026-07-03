@@ -76,39 +76,45 @@ select {
 }
 
 .brand-mark {
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background:
-    linear-gradient(90deg, transparent 45%, rgba(14, 165, 183, 0.88) 46%, rgba(14, 165, 183, 0.88) 54%, transparent 55%),
-    linear-gradient(0deg, transparent 45%, rgba(14, 165, 183, 0.88) 46%, rgba(14, 165, 183, 0.88) 54%, transparent 55%),
-    radial-gradient(circle at center, white 0 48%, transparent 49%),
-    linear-gradient(135deg, #e0f2fe, #dff7ed);
-  border: 3px solid white;
+  background: linear-gradient(135deg, #ffffff, #e0f2fe);
+  border: 2px solid rgba(255, 255, 255, 0.92);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
-  position: relative;
 }
 
-.brand-mark::before,
-.brand-mark::after {
-  content: "";
-  position: absolute;
-  border: 2px solid rgba(14, 165, 183, 0.88);
-  border-left-color: transparent;
-  border-right-color: transparent;
-  border-radius: 50%;
+.brand-mark svg {
+  width: 38px;
+  height: 38px;
+  display: block;
 }
 
-.brand-mark::before {
-  width: 23px;
-  height: 32px;
+.globe-fill {
+  fill: #e0f7fa;
+  stroke: #0f766e;
+  stroke-width: 2.4;
 }
 
-.brand-mark::after {
-  width: 32px;
-  height: 20px;
+.globe-line {
+  fill: none;
+  stroke: #0e7490;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.pin-fill {
+  fill: #ffb020;
+  stroke: #101828;
+  stroke-linejoin: round;
+  stroke-width: 1.6;
+}
+
+.pin-dot {
+  fill: #101828;
 }
 
 .nav-actions {
