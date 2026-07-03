@@ -32,15 +32,15 @@
           Compare destination ideas, route prices, flight time, airlines, and travel moods across 50 countries.
         </p>
         <form class="search-panel" id="searchForm" aria-label="Flight search filters">
-          <label>
+          <label class="field-card from-field">
             <span>From</span>
             <input id="sourceInput" type="search" value="India" aria-label="Source city" />
           </label>
-          <label>
+          <label class="field-card explore-field">
             <span>Explore</span>
             <input id="queryInput" type="search" placeholder="Bangkok, Japan, beach, Emirates..." aria-label="Search destinations" />
           </label>
-          <label>
+          <label class="field-card region-field">
             <span>Region</span>
             <select id="regionFilter" aria-label="Filter by region">
               <option value="all">Everywhere</option>
@@ -48,6 +48,13 @@
           </label>
           <button type="submit">Search</button>
         </form>
+        <div class="quick-search" aria-label="Popular searches">
+          <button type="button" data-search="Bangkok">Bangkok deals</button>
+          <button type="button" data-search="Dubai">Dubai luxury</button>
+          <button type="button" data-search="Beach">Beach trips</button>
+          <button type="button" data-search="Japan">Japan culture</button>
+          <button type="button" data-search="Emirates">Emirates routes</button>
+        </div>
       </section>
     </header>
 

@@ -72,7 +72,8 @@ const elements = {
   avgFare: document.querySelector("#avgFare"),
   topRegion: document.querySelector("#topRegion"),
   form: document.querySelector("#searchForm"),
-  reset: document.querySelector("#resetButton")
+  reset: document.querySelector("#resetButton"),
+  quickSearch: document.querySelector(".quick-search")
 };
 
 function uniqueValues(key) {
@@ -192,3 +193,12 @@ elements.form.addEventListener("submit", (event) => {
 });
 
 elements.reset.addEventListener("click", resetFilters);
+
+elements.quickSearch.addEventListener("click", (event) => {
+  const button = event.target.closest("button[data-search]");
+  if (!button) return;
+
+  elements.query.value = button.dataset.search;
+  renderRoutes();
+  document.querySelector("#routes").scrollIntoView({ behavior: "smooth", block: "start" });
+});
