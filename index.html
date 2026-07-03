@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="KCDS Visit Ur Destiny helps travelers explore international routes, prices, airlines, and travel styles across 50 countries."
+    />
+    <title>KCDS Visit Ur Destiny</title>
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="topbar" aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="KCDS Visit Ur Destiny home">
+          <span class="brand-mark">K</span>
+          <span>KCDS Visit Ur Destiny</span>
+        </a>
+        <div class="nav-actions">
+          <a href="#routes">Routes</a>
+          <a href="#insights">Insights</a>
+          <a href="#planner">Planner</a>
+        </div>
+      </nav>
+
+      <section class="hero-content" id="top">
+        <p class="eyebrow">Global flight inspiration from India</p>
+        <h1>Discover your next international escape.</h1>
+        <p class="hero-copy">
+          Compare destination ideas, route prices, flight time, airlines, and travel moods across 50 countries.
+        </p>
+        <form class="search-panel" id="searchForm" aria-label="Flight search filters">
+          <label>
+            <span>From</span>
+            <input id="sourceInput" type="search" value="India" aria-label="Source city" />
+          </label>
+          <label>
+            <span>Explore</span>
+            <input id="queryInput" type="search" placeholder="Bangkok, Japan, beach, Emirates..." aria-label="Search destinations" />
+          </label>
+          <label>
+            <span>Region</span>
+            <select id="regionFilter" aria-label="Filter by region">
+              <option value="all">Everywhere</option>
+            </select>
+          </label>
+          <button type="submit">Search</button>
+        </form>
+      </section>
+    </header>
+
+    <main>
+      <section class="stats-band" id="insights" aria-label="Travel insights">
+        <article>
+          <span id="shownCount">50</span>
+          <p>countries listed</p>
+        </article>
+        <article>
+          <span id="bestFare">₹8,400</span>
+          <p>lowest sample fare</p>
+        </article>
+        <article>
+          <span id="avgFare">₹52,000</span>
+          <p>average fare</p>
+        </article>
+        <article>
+          <span id="topRegion">Asia</span>
+          <p>most affordable region</p>
+        </article>
+      </section>
+
+      <section class="controls" id="planner" aria-label="Route planner controls">
+        <div>
+          <p class="section-kicker">Plan smarter</p>
+          <h2>Routes, prices, and trip moods in one view</h2>
+        </div>
+        <div class="control-grid">
+          <label>
+            Trip style
+            <select id="styleFilter">
+              <option value="all">All styles</option>
+            </select>
+          </label>
+          <label>
+            Sort by
+            <select id="sortFilter">
+              <option value="deal">Best deal</option>
+              <option value="price">Lowest price</option>
+              <option value="rating">Highest rating</option>
+              <option value="duration">Shortest flight</option>
+            </select>
+          </label>
+          <label class="range-label">
+            Max fare <strong id="maxFareValue">₹1,90,000</strong>
+            <input id="fareRange" type="range" min="8000" max="190000" step="1000" value="190000" />
+          </label>
+        </div>
+      </section>
+
+      <section class="route-section" id="routes">
+        <div class="route-heading">
+          <div>
+            <p class="section-kicker">50-country board</p>
+            <h2>Source, destination, price, and route details</h2>
+          </div>
+          <button class="ghost-button" id="resetButton" type="button">Reset filters</button>
+        </div>
+        <div class="route-grid" id="routeGrid" aria-live="polite"></div>
+        <p class="empty-state" id="emptyState" hidden>No matching routes yet. Try a wider search.</p>
+      </section>
+    </main>
+
+    <footer>
+      <p>KCDS Visit Ur Destiny</p>
+      <p>Demo travel search UI with sample route pricing for portfolio deployment.</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
