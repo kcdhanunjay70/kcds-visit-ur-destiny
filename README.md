@@ -9,7 +9,7 @@ A polished flight-route discovery website inspired by modern travel search exper
 - Filter by region and trip style
 - Sort by best deal, lowest fare, rating, and flight duration
 - Responsive "jigel jigel" UI with premium travel visuals
-- Static deployment ready for GitHub Pages and Render
+- Static deployment ready for Render and GitHub Pages
 
 ## Project Structure
 
@@ -33,9 +33,18 @@ npx serve .
 
 ## Deploy
 
+### GitHub Actions
+
+The included workflow validates the static site and uploads a deployable artifact on every push to `main`.
+
 ### GitHub Pages
 
-The included GitHub Actions workflow publishes the static site from `main`.
+GitHub Pages needs one manual repository setting before the official Pages deploy action can publish:
+
+1. Open repository `Settings`
+2. Go to `Pages`
+3. Set source to `Deploy from a branch`
+4. Choose branch `main` and folder `/root`
 
 ### Render
 

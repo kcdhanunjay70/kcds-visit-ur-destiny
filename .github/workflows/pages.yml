@@ -1,4 +1,4 @@
-name: Deploy static site
+name: Build static site
 
 on:
   push:
@@ -7,18 +7,13 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: static-site
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -31,16 +26,13 @@ jobs:
           test -f app.js
           test -f render.yaml
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+      - name: Package site
+        uses: actions/upload-artifact@v4
         with:
-          enablement: true
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          name: kcds-visit-ur-destiny-site
+          path: |
+            index.html
+            styles.css
+            app.js
+            render.yaml
+            README.md
