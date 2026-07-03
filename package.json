@@ -1,0 +1,17 @@
+{
+  "name": "kcds-visit-ur-destiny",
+  "version": "1.0.0",
+  "description": "Static travel route explorer with 50 destination price cards.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check app.js && node --check server.js"
+  },
+  "keywords": [
+    "travel",
+    "flights",
+    "static-site"
+  ],
+  "author": "KCDS",
+  "license": "MIT"
+}

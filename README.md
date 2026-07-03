@@ -18,17 +18,19 @@ A polished flight-route discovery website inspired by modern travel search exper
 |-- .github/workflows/pages.yml
 |-- app.js
 |-- index.html
+|-- package.json
 |-- render.yaml
+|-- server.js
 |-- styles.css
 `-- README.md
 ```
 
 ## Run Locally
 
-Open `index.html` in a browser, or use any static server:
+Open `index.html` in a browser, or run the included Node static server:
 
 ```bash
-npx serve .
+npm start
 ```
 
 ## Deploy
@@ -48,7 +50,7 @@ GitHub Pages needs one manual repository setting before the official Pages deplo
 
 ### Render
 
-`render.yaml` configures this repository as a Render static site.
+`render.yaml` configures this repository as a Render Node web service. The app serves static files through `server.js`, so Render's default `npm start` deployment works without extra packages.
 
 ## Data Note
 

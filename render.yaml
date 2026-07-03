@@ -1,12 +1,9 @@
 services:
   - type: web
     name: kcds-visit-ur-destiny
-    runtime: static
+    runtime: node
     repo: https://github.com/kcdhanunjay70/kcds-visit-ur-destiny
     branch: main
-    staticPublishPath: .
+    buildCommand: npm install
+    startCommand: npm start
     pullRequestPreviewsEnabled: true
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
