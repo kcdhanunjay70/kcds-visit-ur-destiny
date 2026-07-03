@@ -196,6 +196,13 @@ elements.reset.addEventListener("click", resetFilters);
 
 elements.quickSearch.addEventListener("click", (event) => {
   const button = event.target.closest("button[data-search]");
+  const scrollButton = event.target.closest("button[data-scroll]");
+
+  if (scrollButton) {
+    document.querySelector(scrollButton.dataset.scroll).scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
+
   if (!button) return;
 
   elements.query.value = button.dataset.search;
