@@ -81,9 +81,34 @@ select {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  color: var(--ink);
-  background: white;
+  background:
+    linear-gradient(90deg, transparent 45%, rgba(14, 165, 183, 0.88) 46%, rgba(14, 165, 183, 0.88) 54%, transparent 55%),
+    linear-gradient(0deg, transparent 45%, rgba(14, 165, 183, 0.88) 46%, rgba(14, 165, 183, 0.88) 54%, transparent 55%),
+    radial-gradient(circle at center, white 0 48%, transparent 49%),
+    linear-gradient(135deg, #e0f2fe, #dff7ed);
+  border: 3px solid white;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  position: relative;
+}
+
+.brand-mark::before,
+.brand-mark::after {
+  content: "";
+  position: absolute;
+  border: 2px solid rgba(14, 165, 183, 0.88);
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-radius: 50%;
+}
+
+.brand-mark::before {
+  width: 23px;
+  height: 32px;
+}
+
+.brand-mark::after {
+  width: 32px;
+  height: 20px;
 }
 
 .nav-actions {
@@ -584,13 +609,39 @@ input[type="range"] {
 }
 
 .education-card p,
-.education-card li {
+.education-card li,
+.education-card label {
   color: var(--muted);
   line-height: 1.6;
 }
 
 .education-card p {
   margin-bottom: 0;
+}
+
+.education-card label {
+  display: grid;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.education-card select {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid rgba(16, 24, 40, 0.12);
+  border-radius: 8px;
+  padding: 0 12px;
+  color: var(--ink);
+  background: #f8fafc;
+  font-weight: 800;
+  outline: none;
+}
+
+.education-card select:focus {
+  border-color: var(--aqua);
+  box-shadow: 0 0 0 4px rgba(14, 165, 183, 0.13);
 }
 
 .study-tag {
@@ -648,6 +699,22 @@ input[type="range"] {
 
 .checklist-card li {
   color: rgba(255, 255, 255, 0.78);
+}
+
+.education-note {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 20px;
+  border-radius: 8px;
+  color: white;
+  background: #111827;
+}
+
+.education-note p {
+  margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.7;
 }
 
 footer {
