@@ -1,17 +1,22 @@
 {
   "name": "kcds-visit-ur-destiny",
   "version": "1.0.0",
-  "description": "Static travel route explorer with 50 destination price cards.",
+  "description": "MongoDB-backed travel route explorer with 50 destination price cards.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check app.js && node --check server.js"
+    "check": "node --check app.js && node --check server.js",
+    "test": "node --test"
   },
   "keywords": [
     "travel",
     "flights",
-    "static-site"
+    "mongodb"
   ],
   "author": "KCDS",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.22.2",
+    "mongodb": "6.17.0"
+  }
 }

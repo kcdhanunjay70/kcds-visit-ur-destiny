@@ -1,4 +1,4 @@
-const routes = [
+const DEFAULT_ROUTES = [
   { country: "Thailand", flag: "🇹🇭", source: "Hyderabad", destination: "Bangkok", price: 11800, region: "Asia", style: "Beach", airline: "Thai Airways", duration: 4.2, rating: 4.8 },
   { country: "Malaysia", flag: "🇲🇾", source: "Chennai", destination: "Kuala Lumpur", price: 9800, region: "Asia", style: "City", airline: "AirAsia", duration: 4.0, rating: 4.6 },
   { country: "Singapore", flag: "🇸🇬", source: "Bengaluru", destination: "Singapore", price: 14200, region: "Asia", style: "Luxury", airline: "Singapore Airlines", duration: 4.6, rating: 4.9 },
@@ -51,6 +51,8 @@ const routes = [
   { country: "Norway", flag: "🇳🇴", source: "Mumbai", destination: "Oslo", price: 68600, region: "Europe", style: "Adventure", airline: "Qatar Airways", duration: 12.2, rating: 4.5 }
 ];
 
+let routes = [...DEFAULT_ROUTES];
+
 const formatter = new Intl.NumberFormat("en-IN", {
   style: "currency",
   currency: "INR",
@@ -82,6 +84,8 @@ function uniqueValues(key) {
 }
 
 function populateFilters() {
+  elements.region.replaceChildren(new Option("All regions", "all"));
+  elements.style.replaceChildren(new Option("All styles", "all"));
   uniqueValues("region").forEach((region) => {
     elements.region.append(new Option(region, region));
   });
@@ -180,12 +184,35 @@ function resetFilters() {
   renderRoutes();
 }
 
-populateFilters();
-renderRoutes();
+async function loadRoutes() {
+  try {
+    const response = await fetch("/api/routes");
+    if (!response.ok) throw new Error("Could not load routes");
+    const payload = await response.json();
+    routes = payload.routes;
+  } catch (error) {
+    console.warn("MongoDB routes unavailable; showing bundled demo routes.", error);
+    routes = [...DEFAULT_ROUTES];
+  }
+  populateFilters();
+  renderRoutes();
+}
+
+loadRoutes();
 
 elements.form.addEventListener("submit", (event) => {
   event.preventDefault();
   renderRoutes();
+  fetch("/api/searches", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      source: elements.source.value,
+      query: elements.query.value,
+      region: elements.region.value,
+      style: elements.style.value
+    })
+  }).catch(() => {});
   document.querySelector("#routes").scrollIntoView({ behavior: "smooth", block: "start" });
 });
 

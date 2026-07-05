@@ -7,3 +7,8 @@ services:
     buildCommand: npm install
     startCommand: npm start
     pullRequestPreviewsEnabled: true
+    envVars:
+      - key: MONGO_URI
+        sync: false
+      - key: MONGO_DB_NAME
+        value: visit_ur_destiny
