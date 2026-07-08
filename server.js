@@ -6,7 +6,7 @@ const { MongoClient } = require("mongodb");
 
 const root = __dirname;
 const port = Number(process.env.PORT || 3000);
-const mongoUri = process.env.MONGO_URI || "mongodb://localhost:27017";
+const mongoUri = process.env.MONGO_URI;
 const databaseName = process.env.MONGO_DB_NAME || "visit_ur_destiny";
 
 function bundledRoutes() {
@@ -46,10 +46,95 @@ function publicRoute(route) {
   return { ...route, id: String(route._id), _id: undefined };
 }
 
+function matchesRoute(route, query) {
+  return Object.entries(query).every(([key, value]) => {
+    if (key === "$or") {
+      return value.some((condition) => matchesRoute(route, condition));
+    }
+    if (value && value.$regex) {
+      const regex = value.$regex instanceof RegExp ? value.$regex : new RegExp(value.$regex, value.$options || "");
+      return regex.test(String(route[key] || ""));
+    }
+    return route[key] === value;
+  });
+}
+
+function createMemoryDatabase() {
+  const data = {
+    routes: [],
+    searches: []
+  };
+  let sequence = 1;
+
+  function collection(name) {
+    const records = data[name] || (data[name] = []);
+    return {
+      async createIndex() {},
+      async countDocuments(query = {}) {
+        return records.filter((record) => matchesRoute(record, query)).length;
+      },
+      async insertMany(items) {
+        items.forEach((item) => records.push({ ...item, _id: String(sequence++) }));
+        return { insertedCount: items.length };
+      },
+      async insertOne(item) {
+        const record = { ...item, _id: String(sequence++) };
+        records.push(record);
+        return { insertedId: record._id };
+      },
+      find(query = {}) {
+        const result = records.filter((record) => matchesRoute(record, query));
+        return {
+          sort(sortSpec = {}) {
+            const [[field, direction] = []] = Object.entries(sortSpec);
+            if (field) {
+              result.sort((left, right) => String(left[field] || "").localeCompare(String(right[field] || "")) * direction);
+            }
+            return this;
+          },
+          async toArray() {
+            return result.map((record) => ({ ...record }));
+          }
+        };
+      }
+    };
+  }
+
+  return {
+    collection,
+    async command() {
+      return { ok: 1 };
+    }
+  };
+}
+
+async function connectDatabase(options = {}) {
+  if (options.client) {
+    return {
+      client: options.client,
+      database: options.client.db(options.databaseName || databaseName),
+      mode: "mongodb"
+    };
+  }
+
+  if (!mongoUri) {
+    console.warn("MONGO_URI is not configured. Starting with bundled in-memory route data.");
+    return { client: null, database: createMemoryDatabase(), mode: "memory" };
+  }
+
+  const client = new MongoClient(mongoUri, { serverSelectionTimeoutMS: 3000 });
+  try {
+    await client.connect();
+    return { client, database: client.db(options.databaseName || databaseName), mode: "mongodb" };
+  } catch (error) {
+    console.warn(`MongoDB connection failed (${error.message}). Starting with bundled in-memory route data.`);
+    await client.close().catch(() => {});
+    return { client: null, database: createMemoryDatabase(), mode: "memory" };
+  }
+}
+
 async function createApp(options = {}) {
-  const client = options.client || new MongoClient(mongoUri, { serverSelectionTimeoutMS: 3000 });
-  if (!options.client) await client.connect();
-  const database = client.db(options.databaseName || databaseName);
+  const { client, database, mode } = await connectDatabase(options);
   const routes = database.collection("routes");
   const searches = database.collection("searches");
 
@@ -65,7 +150,7 @@ async function createApp(options = {}) {
   app.get("/api/health", async (_request, response, next) => {
     try {
       await database.command({ ping: 1 });
-      response.json({ success: true, status: "healthy", database: "mongodb" });
+      response.json({ success: true, status: "healthy", database: mode });
     } catch (error) {
       next(error);
     }
